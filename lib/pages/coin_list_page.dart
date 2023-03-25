@@ -53,7 +53,7 @@ class _CoinListPageState extends State<CoinListPage> {
           padding: const EdgeInsets.only(right: 8, left: 8),
           child: ListView.separated(
             itemBuilder: (_, index) =>
-                _coinItem(coinService.filteredCoinList[index]),
+                _coinItem(coinService, coinService.filteredCoinList[index]),
             separatorBuilder: (_, __) => const Divider(),
             itemCount: coinService.filteredCoinList.length,
           ),
@@ -62,7 +62,7 @@ class _CoinListPageState extends State<CoinListPage> {
     );
   }
 
-  _coinItem(Coin coin) => ListTile(
+  _coinItem(CoinService coinService, Coin coin) => ListTile(
         leading: CircleAvatar(
           backgroundColor: Palette.bg,
           child: CachedNetworkImage(
@@ -96,5 +96,10 @@ class _CoinListPageState extends State<CoinListPage> {
             Text('${coin.price} USD'),
           ],
         ),
+        onTap: () {
+          coinService.selectedCoin = coin;
+
+          Navigator.pushNamed(context, 'CoinDetail');
+        },
       );
 }

@@ -35,6 +35,15 @@ class CoinService with ChangeNotifier {
     notifyListeners();
   }
 
+  late Coin _selectedCoin;
+
+  Coin get selectedCoin => _selectedCoin;
+  set selectedCoin(Coin coin) {
+    _selectedCoin = coin;
+
+    notifyListeners();
+  }
+
   // Get coin list
   Future<bool> getCoinList() async {
     try {
